@@ -47,7 +47,54 @@ namespace Loops
             Enter another grade? [y/n]: n
             Your GPA is: 4.0
             */
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Let's calculate a GPA!");
+
+            var gradeSum = 0;
+            var creditSum = 0;
+
+            var finished = false;
+            while (!finished)
+            {
+                var isValid = false;
+                var grade = 0;
+                var credit = 0;
+                while (!isValid)
+                {
+                    Console.Write("What is your grade? ");
+                    if (!int.TryParse(Console.ReadLine(), out grade))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
+                }
+                isValid = false;
+                while (!isValid)
+                {
+                    Console.Write("# of Credits? ");
+                    if (!int.TryParse(Console.ReadLine(), out credit))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        gradeSum += grade * credit;
+                        creditSum += credit;
+                        isValid = true;
+                    }
+                }
+
+                Console.Write("Enter another grade [y/n]? ");
+
+                var answer = Console.ReadLine();
+                if (answer.ToLower().StartsWith("n")) finished = true;
+
+            }
+
+            var gpa = (decimal)gradeSum / (decimal)creditSum;
+            Console.WriteLine($"Your GPA is {gpa}");
 
             Console.ReadLine();
         }
